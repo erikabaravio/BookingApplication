@@ -1,5 +1,7 @@
 package com.bookerapp.controller;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bookerapp.model.Customer;
 import com.bookerapp.model.TravelPackage;
 import com.bookerapp.service.TravelPackageService;
 
@@ -17,7 +20,7 @@ import com.bookerapp.service.TravelPackageService;
 public class TravelPackageController {
 
 	private TravelPackageService travelPackageService;
-
+	
 	public TravelPackageController(TravelPackageService travelPackageService) {
 		super();
 		this.travelPackageService = travelPackageService;
@@ -29,28 +32,34 @@ public class TravelPackageController {
 		return travelPackageService.findAll();
 	}
 
-	// CREATE
+	// CREATE LIST
 	@PostMapping
-	public TravelPackage saveTravelPackage(@RequestBody TravelPackage travelPackage) {
-		return travelPackageService.saveTravelPackage(travelPackage);
+	public List<TravelPackage> saveTravelPackage(@RequestBody List<TravelPackage> travelPackageList) {
+		return travelPackageService.saveTravelPackageList(travelPackageList);
 	}
 
-	// DELETE
-	@DeleteMapping("/{travelPackageId}")
-	public void deleteTravelPackage(@PathVariable("travelPackageId") int travelPackageId) {
-		travelPackageService.deleteTravelPackage(travelPackageService.findById(travelPackageId));
+	// DELETE LIST
+	@DeleteMapping
+	public void deleteTravelPackageList() {
+		travelPackageService.deleteTravelPackageList((List<TravelPackage>) travelPackageService.findAll());
+	}
+
+	// UPDATE LIST
+	@PutMapping
+	public List<TravelPackage> updateTravelPackageList(@RequestBody List<TravelPackage> travelPackageList) {
+		return travelPackageService.updateTravelPackageList(travelPackageList);
 	}
 
 	// READ (BY ID)
-	@GetMapping("/{travelPackageId}")
-	public TravelPackage findTravelPackage(@PathVariable("travelPackageId") int travelPackageId) {
-		return travelPackageService.findById(travelPackageId);
-	}
-
+//	@GetMapping("/{travelPackageId}")
+//	public TravelPackage findTravelPackage(@PathVariable("travelPackageId") int travelPackageId) {
+//		return travelPackageService.findById(travelPackageId);
+//	}
+//
 	// UPDATE
-	@PutMapping("/{travelPackageId}")
-	public TravelPackage updateTravelPackage(@PathVariable("travelPackageId") int travelPackageId, @RequestBody TravelPackage travelPackage) {
-		travelPackage.setTravelPackageId(travelPackageId);
-		return travelPackageService.updateTravelPackage(travelPackageId, travelPackage);
-	}
+//	@PutMapping("/{travelPackageId}")
+//	public TravelPackage updateTravelPackage(@PathVariable("travelPackageId") int travelPackageId, @RequestBody TravelPackage travelPackage) {
+//		travelPackage.setTravelPackageId(travelPackageId);
+//		return travelPackageService.updateTravelPackage(travelPackageId, travelPackage);
+//	}
 }

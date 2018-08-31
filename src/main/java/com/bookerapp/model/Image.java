@@ -2,6 +2,7 @@ package com.bookerapp.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators.PropertyGenerator;
@@ -13,7 +14,8 @@ public class Image {
 	private int imageId;
 	private String description;
 	private String imageUrl;
-	
+	@ManyToOne
+	private TravelPackage travelPackage;
 	
 	public int getImageId() {
 		return imageId;
@@ -32,6 +34,12 @@ public class Image {
 	}
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
+	}
+	public TravelPackage getTravelPackage() {
+		return travelPackage;
+	}
+	public void setTravelPackage(TravelPackage travelPackage) {
+		this.travelPackage = travelPackage;
 	}
 	
 }

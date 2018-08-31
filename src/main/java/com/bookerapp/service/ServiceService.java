@@ -1,5 +1,7 @@
 package com.bookerapp.service;
 
+import java.util.List;
+
 import com.bookerapp.model.Service;
 import com.bookerapp.repository.ServiceRepository;
 
@@ -25,6 +27,11 @@ public class ServiceService {
 	// CREATE
 	public Service saveService(Service service) {
 		return serviceRepository.save(service);
+	}
+	
+	// CREATE LIST
+	public void saveAllService(List<Service> serviceList) {
+		serviceRepository.saveAll(serviceList);
 	}
 
 	// DELETE

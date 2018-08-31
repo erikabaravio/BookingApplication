@@ -64,8 +64,6 @@ public class CustomerService {
 	
 
 	// UPDATE LIST
-	// NO UPDATE 
-	// NULL POINTER
 	@Transactional
 	public List<Customer> updateCustomerList(List<Customer> customerList) {
 		List<Customer> tempCustomer = new ArrayList<Customer>();

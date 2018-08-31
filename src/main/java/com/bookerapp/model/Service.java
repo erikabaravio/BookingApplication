@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -19,7 +20,8 @@ public class Service {
 	private String description;
 	@OneToMany
 	private List<Image> images;
-	
+	@ManyToOne
+	private TravelPackage travelPackage;
 	
 	public int getServiceId() {
 		return serviceId;
@@ -45,6 +47,13 @@ public class Service {
 	public void setImages(List<Image> images) {
 		this.images = images;
 	}
+	public TravelPackage getTravelPackage() {
+		return travelPackage;
+	}
+	public void setTravelPackage(TravelPackage travelPackage) {
+		this.travelPackage = travelPackage;
+	}
+	
 	
 	
 }
