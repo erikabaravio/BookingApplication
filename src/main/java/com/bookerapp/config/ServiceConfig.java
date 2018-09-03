@@ -3,8 +3,6 @@ package com.bookerapp.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.bookerapp.model.Service;
-import com.bookerapp.model.TravelPackage;
 import com.bookerapp.repository.CustomerRepository;
 import com.bookerapp.repository.FeedbackRepository;
 import com.bookerapp.repository.ReservationRepository;
@@ -13,7 +11,7 @@ import com.bookerapp.repository.TravelPackageRepository;
 import com.bookerapp.service.CustomerService;
 import com.bookerapp.service.FeedbackService;
 import com.bookerapp.service.ReservationService;
-import com.bookerapp.service.ServiceService;
+import com.bookerapp.service.TravelService;
 import com.bookerapp.service.TravelPackageService;
 
 
@@ -36,12 +34,12 @@ public class ServiceConfig {
 	}
 	
 	@Bean
-	public TravelPackageService travelPackageService(TravelPackageRepository travelPackageRepository, ServiceService serviceService) {
-		return new TravelPackageService(travelPackageRepository, serviceService);
+	public TravelPackageService travelPackageService(TravelPackageRepository travelPackageRepository) {
+		return new TravelPackageService(travelPackageRepository);
 	}
 	
 	@Bean
-	public ServiceService serviceService(ServiceRepository serviceRepository) {
-		return new ServiceService(serviceRepository);
+	public TravelService serviceService(ServiceRepository serviceRepository) {
+		return new TravelService(serviceRepository);
 	}
 }

@@ -5,11 +5,11 @@ import java.util.List;
 import com.bookerapp.model.Service;
 import com.bookerapp.repository.ServiceRepository;
 
-public class ServiceService {
+public class TravelService {
 	
 	private ServiceRepository serviceRepository;
 
-	public ServiceService(ServiceRepository serviceRepository) {
+	public TravelService(ServiceRepository serviceRepository) {
 		super();
 		this.serviceRepository = serviceRepository;
 	}

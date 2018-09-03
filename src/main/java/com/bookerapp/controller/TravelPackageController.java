@@ -26,7 +26,28 @@ public class TravelPackageController {
 		this.travelPackageService = travelPackageService;
 	}
 
-	// READ (ALL)
+	// DELETE (BY ID)
+	@DeleteMapping("/{travelPackageId}")
+	public void deleteTravelPackage(@PathVariable("travelPackageId") int travelPackageId) {
+		travelPackageService.deleteTravelPackage(travelPackageService.findById(travelPackageId));
+	}
+
+	// READ (BY ID)
+	@GetMapping("/{travelPackageId}")
+	public TravelPackage findTravelPackage(@PathVariable("travelPackageId") int travelPackageId) {
+		return travelPackageService.findById(travelPackageId);
+	}
+
+	// UPDATE (BY ID)
+	@PutMapping("/{travelPackageId}")
+	public TravelPackage updateTravelPackage(@PathVariable("travelPackageId") int travelPackageId, @RequestBody TravelPackage travelPackage) {
+		travelPackage.setTravelPackageId(travelPackageId);
+		return travelPackageService.updateTravelPackage(travelPackageId, travelPackage);
+	}
+
+//-----------------
+
+	// READ LIST
 	@GetMapping
 	public Iterable<TravelPackage> getAllTravelPackage() {
 		return travelPackageService.findAll();
@@ -34,7 +55,7 @@ public class TravelPackageController {
 
 	// CREATE LIST
 	@PostMapping
-	public List<TravelPackage> saveTravelPackage(@RequestBody List<TravelPackage> travelPackageList) {
+	public List<TravelPackage> saveTravelPackageList(@RequestBody List<TravelPackage> travelPackageList) {
 		return travelPackageService.saveTravelPackageList(travelPackageList);
 	}
 
@@ -46,20 +67,8 @@ public class TravelPackageController {
 
 	// UPDATE LIST
 	@PutMapping
-	public List<TravelPackage> updateTravelPackageList(@RequestBody List<TravelPackage> travelPackageList) {
+	public List<TravelPackage> updateCustomerList(@RequestBody List<TravelPackage> travelPackageList) {
 		return travelPackageService.updateTravelPackageList(travelPackageList);
 	}
 
-	// READ (BY ID)
-//	@GetMapping("/{travelPackageId}")
-//	public TravelPackage findTravelPackage(@PathVariable("travelPackageId") int travelPackageId) {
-//		return travelPackageService.findById(travelPackageId);
-//	}
-//
-	// UPDATE
-//	@PutMapping("/{travelPackageId}")
-//	public TravelPackage updateTravelPackage(@PathVariable("travelPackageId") int travelPackageId, @RequestBody TravelPackage travelPackage) {
-//		travelPackage.setTravelPackageId(travelPackageId);
-//		return travelPackageService.updateTravelPackage(travelPackageId, travelPackage);
-//	}
 }

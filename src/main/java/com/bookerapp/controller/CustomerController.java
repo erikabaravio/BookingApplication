@@ -25,7 +25,7 @@ public class CustomerController {
 		this.customerService = customerService;
 	}
 
-	// DELETE
+	// DELETE (BY ID)
 	@DeleteMapping("/{customerId}")
 	public void deleteCustomer(@PathVariable("customerId") int customerId) {
 		customerService.deleteCustomer(customerService.findById(customerId));
@@ -37,7 +37,7 @@ public class CustomerController {
 		return customerService.findById(customerId);
 	}
 
-	// UPDATE
+	// UPDATE (BY ID)
 	@PutMapping("/{customerId}")
 	public Customer updateCustomer(@PathVariable("customerId") int customerId, @RequestBody Customer customer) {
 		customer.setCustomerId(customerId);
@@ -46,7 +46,7 @@ public class CustomerController {
 
 //-----------------
 
-	// READ (ALL)
+	// READ LIST
 	@GetMapping
 	public Iterable<Customer> getAllCustomers() {
 		return customerService.findAll();

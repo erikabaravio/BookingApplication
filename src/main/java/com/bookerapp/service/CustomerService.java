@@ -11,36 +11,50 @@ import com.bookerapp.repository.CustomerRepository;
 public class CustomerService {
 
 	private CustomerRepository customerRepository;
-	private List<Customer> updatedCustomerList;
-	
-	
 
 	public CustomerService(CustomerRepository customerRepository) {
 		super();
 		this.customerRepository = customerRepository;
 	}
 
-	// READ (BY ID)
-	public Customer findById(int id) {
-		return customerRepository.findById(id).get();
-	}
-
-	// READ (ALL)
+// LIST
+	// READ LIST
+	@Transactional
 	public Iterable<Customer> findAll() {
 		return customerRepository.findAll();
 	}
 
-	// CREATE
-	public Customer saveCustomer(Customer customer) {
-		return customerRepository.save(customer);
+	// CREATE LIST
+	@Transactional
+	public List<Customer> saveCustomerList(List<Customer> customerList) {
+		return (List<Customer>) customerRepository.saveAll(customerList);
 	}
 
-	// DELETE
+	// DELETE LIST
+	@Transactional
+	public void deleteCustomerList(List<Customer> customerList) {
+		customerRepository.deleteAll(customerList);
+	}
+
+	// UPDATE LIST
+	@Transactional
+	public List<Customer> updateCustomerList(List<Customer> customerList) {
+		List<Customer> tempCustomer = new ArrayList<Customer>();
+		for (Customer customer : customerList) {
+			tempCustomer.add(updateCustomer(customer.getCustomerId(), customer));
+		}
+		return tempCustomer;
+	}
+
+// BY ID
+	// DELETE (BY ID)
+	@Transactional
 	public void deleteCustomer(Customer customer) {
 		customerRepository.delete(customer);
 	}
 
-	// UPDATE
+	// UPDATE (BY ID)
+	@Transactional
 	public Customer updateCustomer(int customerId, Customer customer) {
 		Customer updatedCustomer = customerRepository.findById(customerId).get();
 		if (customer.getFirstName() != null) {
@@ -51,25 +65,11 @@ public class CustomerService {
 		}
 		return customerRepository.save(updatedCustomer);
 	}
-
-	// CREATE LIST
-	public List<Customer> saveCustomerList(List<Customer> customerList) {
-		return (List<Customer>) customerRepository.saveAll(customerList);
-	}
-
-	// DELETE LIST
-	public void deleteCustomerList(List<Customer> customerList) {
-		customerRepository.deleteAll(customerList);
-	}
 	
-
-	// UPDATE LIST
+	// READ (BY ID)
 	@Transactional
-	public List<Customer> updateCustomerList(List<Customer> customerList) {
-		List<Customer> tempCustomer = new ArrayList<Customer>();
-		for(Customer customer : customerList) {
-			tempCustomer.add(updateCustomer(customer.getCustomerId(), customer));
-		}
-		return tempCustomer;
+	public Customer findById(int id) {
+		return customerRepository.findById(id).get();
 	}
+
 }
